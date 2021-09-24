@@ -12,7 +12,7 @@ The application is built with Node.js and already has all environment configured
 
 ### run individually
 
-docker container run -d --name mongodb mongodb:3.2.5
+docker container run -d --name mongodb mongo:3.2.5
 
 wait for a minute
 
