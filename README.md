@@ -1,52 +1,43 @@
-# Running Node.js apps with docker - example code
+# Docker Compose Nodejs and MongoDB example
 
-
-## Example APP
-The example Node.js app includes dummy code and tests
-
-### Running the application
-
-The application is built with Node.js and already has all environment configured with docker. To start the application you will need `docker` and `docker-compose` installed on the machine. Having that you may run:
-
-### run individually
-
-docker container run -d --name mongodb mongo:3.2.5
-
-wait for a minute
-
-docker container run -d --name nodejsapp -p 8081:3000 nodejsapp
-
-```shell
+## Run the System
+We can easily run the whole with only a single command:
+```bash
 docker-compose up
 ```
 
-And then the application and database will be started:
+Docker will pull the MongoDB and Node.js images (if our machine does not have it before).
 
-```shell
-Starting nodedocker_mongodb_1 ...
-Starting nodedocker_mongodb_1 ... done
-Starting nodedocker_app_1 ...
-Starting nodedocker_app_1 ... done
+The services can be run on the background with command:
+```bash
+docker-compose up -d
 ```
 
-The application will be avaible on *PORT 3000* by default, but it's configurable via `docker-compose.yml` file as an environment variable.
-
-### Running the application in development mode
-
-Sometimes you would like to run the application in development mode. This project already has a prepared enviroment for that, you have to run:
-
-```shell
-docker-compose -f docker-compose.development.yml up
+## Stop the System
+Stopping all the running containers is also simple with a single command:
+```bash
+docker-compose down
 ```
 
-This docker compose file will start the application using [`nodemon`](https://github.com/remy/nodemon) and will share the local application code with the container. Any change on the hosts code will restart the application (whitout restarting the container because nodemon is taking care of that).
-
-### Running the tests
-
-To run the tests using docker you just have to run the following command:
-
-```shell
-docker-compose -f docker-compose.test.yml up
+If you need to stop and remove all containers, networks, and all images used by any service in <em>docker-compose.yml</em> file, use the command:
+```bash
+docker-compose down --rmi all
 ```
 
-And then all tests will be ran and the status exit code will be 0 or 1 that means true or false.
+For more detail, please visit:
+> [Docker Compose Node.js Express and MongoDB example](https://www.bezkoder.com/docker-compose-nodejs-mongodb/)
+
+Related Posts:
+> [Node.js, Express & MongoDb: Build a CRUD Rest Api example](https://bezkoder.com/node-express-mongodb-crud-rest-api/)
+
+> [Server side Pagination in Node.js with MongoDB and Mongoose](https://bezkoder.com/node-js-mongodb-pagination/)
+
+Security:
+> [Node.js + MongoDB: User Authentication & Authorization with JWT](https://bezkoder.com/node-js-mongodb-auth-jwt/)
+
+Associations:
+> [MongoDB One-to-One relationship tutorial with Mongoose examples](https://bezkoder.com/mongoose-one-to-one-relationship-example/)
+
+> [MongoDB One-to-Many Relationship tutorial with Mongoose examples](https://bezkoder.com/mongoose-one-to-many-relationship/)
+
+> [MongoDB Many-to-Many Relationship with Mongoose examples](https://bezkoder.com/mongodb-many-to-many-mongoose/)
