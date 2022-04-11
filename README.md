@@ -24,20 +24,19 @@ If you need to stop and remove all containers, networks, and all images used by 
 docker-compose down --rmi all
 ```
 
-For more detail, please visit:
-> [Docker Compose Node.js Express and MongoDB example](https://www.bezkoder.com/docker-compose-nodejs-mongodb/)
+### Docker docker containers without compose
 
-Related Posts:
-> [Node.js, Express & MongoDb: Build a CRUD Rest Api example](https://bezkoder.com/node-express-mongodb-crud-rest-api/)
+#### Build the docker image 
 
-> [Server side Pagination in Node.js with MongoDB and Mongoose](https://bezkoder.com/node-js-mongodb-pagination/)
+```
+cd nodejs-app
 
-Security:
-> [Node.js + MongoDB: User Authentication & Authorization with JWT](https://bezkoder.com/node-js-mongodb-auth-jwt/)
+docker build -t app .
 
-Associations:
-> [MongoDB One-to-One relationship tutorial with Mongoose examples](https://bezkoder.com/mongoose-one-to-one-relationship-example/)
+docker network create myapp
 
-> [MongoDB One-to-Many Relationship tutorial with Mongoose examples](https://bezkoder.com/mongoose-one-to-many-relationship/)
+docker container run -d --network myapp --env-file ./.env -p 7017:27017 --name mongodb mongo
 
-> [MongoDB Many-to-Many Relationship with Mongoose examples](https://bezkoder.com/mongodb-many-to-many-mongoose/)
+docker container run -d --network myapp --env-file ./.env  -p 8081:8080 --name app app
+
+```
